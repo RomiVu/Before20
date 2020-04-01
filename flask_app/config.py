@@ -11,6 +11,8 @@ class BaseConfig:
     DEBUG = False
     SECRET_KEY = '\xbf\xb0\x11\xb1\xcd\xf9\xba\x8bp\x0c...'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    RECAPTCHA_PUBLIC_KEY = 'to be'
+    RECAPTCHA_PRIVATE_KEY = 'to be '
 
 class ProductionConfig(BaseConfig):
     pass

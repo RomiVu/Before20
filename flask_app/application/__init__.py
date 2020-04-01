@@ -4,7 +4,7 @@ import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
 from flask import Flask
-
+from flask_bootstrap import Bootstrap
 
 def create_app(Config):
     "construct the core application"
@@ -17,6 +17,8 @@ def create_app(Config):
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+
+    Bootstrap(app)
     
     # from .admin import admin_routes
     from .auth import auth_routes

@@ -13,10 +13,9 @@ def index():
     except TemplateNotFound:
         abort(404)
 
-
-@main_bp.route('/about')
-def about():
+@main_bp.route('/user/<username>')
+def user(username):
     try:
-        return render_template('about.html')
+        return render_template('user.html')
     except TemplateNotFound:
         abort(404)

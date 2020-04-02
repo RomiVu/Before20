@@ -34,17 +34,17 @@ def init_database():
     # Create the database and the database table
     db.create_all()
 
-    # # Insert user data
-    # user1 = User(email='patkennedy79@gmail.com', name='FlaskIsAwesome')
-    # user2 = User(email='kennedyfamilyrecipes@gmail.com', name='PaSsWoRd')
-    # db.session.add(user1)
-    # db.session.add(user2)
+    # Insert user data
+    user1 = User(email='patkennedy79@gmail.com', name='patkennedy')
+    user1.set_password('FlaskIsAwesome')
+    user2 = User(email='kennedyfamilyrecipes@gmail.com', name='PaSsWoRd')
+    db.session.add(user1)
+    db.session.add(user2)
 
-    # # Commit the changes for the users
-    # db.session.commit()
+    # Commit the changes for the users
+    db.session.commit()
 
     yield db  # this is where the testing happens!
 
     db.session.remove()
     db.drop_all()
-

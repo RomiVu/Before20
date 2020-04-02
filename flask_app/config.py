@@ -13,17 +13,15 @@ class BaseConfig:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     RECAPTCHA_PUBLIC_KEY = 'to be'
     RECAPTCHA_PRIVATE_KEY = 'to be '
-
-class ProductionConfig(BaseConfig):
-    pass
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(base_dir, 'dev.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class TestingConfig(BaseConfig):
     TESTING = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+
+class ProductionConfig(BaseConfig):
+    pass

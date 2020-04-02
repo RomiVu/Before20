@@ -9,13 +9,13 @@ main_bp = Blueprint("main_bp", __name__, template_folder="templates", static_fol
 @main_bp.route('/index')
 def index():
     try:
-        return render_template('index.html')
+        return render_template('main/index.html')
     except TemplateNotFound:
         abort(404)
 
 @main_bp.route('/user/<username>')
 def user(username):
     try:
-        return render_template('user.html')
+        return render_template('main/user.html')
     except TemplateNotFound:
         abort(404)

@@ -20,7 +20,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth_bp.login'))
-    return render_template('register.html', form=form)
+    return render_template('auth/egister.html', form=form)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -33,7 +33,7 @@ def login():
                 return redirect(url_for('auth_bp.login'))
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('main_bp.index'))
-        return render_template('login.html', form=form)
+        return render_template('auth/login.html', form=form)
     else:
         return redirect(url_for("main_bp.index"))
 
@@ -58,4 +58,4 @@ def reset_password():
         db.session.commit()
         flash(f"username:{form.username.data} have changed your password.")
         return redirect(url_for('auth_bp.login'))
-    return render_template('reset_password.html', form=form)
+    return render_template('auth/reset_password.html', form=form)

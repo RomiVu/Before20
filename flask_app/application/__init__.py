@@ -1,16 +1,21 @@
 """ Initialize app """
-
 import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
 from flask import Flask
 from flask_bootstrap import Bootstrap
 
-def create_app(Config):
+def create_app(config=None):
     "construct the core application"
     app = Flask(__name__)
 
-    app.config.from_object(Config)
+    if config is None:
+        app.config.from_mapping(
+            SECRET_KEY="dev",
+            SQLALCHEMY_DATABASE_URI='sqlite:///:memory:'
+        )
+    else:
+        app.config.from_object(config)
 
     from .models import db, migrate, login_manager
     

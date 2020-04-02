@@ -12,7 +12,7 @@ class RegisterForm(FlaskForm):
     email = StringField('Email Address', validators=[DataRequired(), Email(message="this is not a vaild email address.")])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
     password2 = PasswordField('Repeat your Password', validators=[DataRequired(), EqualTo('password', message="must be same as above")])
-    recaptcha = RecaptchaField()
+    #recaptcha = RecaptchaField()
     submit = SubmitField("Register Now!")
     
     def validate_username(self, username):
@@ -34,7 +34,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField("Remember Me")
-    recaptcha = RecaptchaField()
+    #recaptcha = RecaptchaField()
     submit = SubmitField("Login")
 
 
@@ -43,7 +43,7 @@ class ResetPasswordForm(FlaskForm):
     email = StringField('Email Address', validators=[DataRequired(), Email(message="this is not a vaild email address.")])
     password = PasswordField('New Password', validators=[DataRequired(), Length(min=8)])
     password2 = PasswordField('Repeat your Password', validators=[DataRequired(), EqualTo('password', message="must be same as above")])
-    recaptcha = RecaptchaField()
+    #recaptcha = RecaptchaField()
     submit = SubmitField('Reset')
 
     def validate_username(self, username):

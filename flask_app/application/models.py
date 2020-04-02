@@ -40,6 +40,10 @@ class User(UserMixin, db.Model):
                                     backref=db.backref("followers", lazy='dynamic'))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
+    about_me = db.Column(db.String(140))
+    avator = db.Column(db.String(128))
+    role = db.Column(db.String(20), default='user')
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

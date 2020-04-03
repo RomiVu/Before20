@@ -1,5 +1,3 @@
-from application.models import User
- 
 
 def test_new_user(new_user):
     """

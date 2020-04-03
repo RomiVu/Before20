@@ -14,6 +14,7 @@ class BaseConfig:
     RECAPTCHA_PUBLIC_KEY = 'to be'
     RECAPTCHA_PRIVATE_KEY = 'to be '
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    API_TOKEN_EXPIRE_TIME = 10 # minutes
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True

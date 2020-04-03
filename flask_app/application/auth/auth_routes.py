@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template, abort, request, redirect, url_for, flash
 from jinja2 import TemplateNotFound
-from flask_login import current_user, logout_user, login_user
+from flask_login import current_user, logout_user, login_user, login_required
 
 from .auth_forms import RegisterForm, LoginForm, ResetPasswordForm
 from ..models import db, User, Post, Category
 
 
-auth_bp = Blueprint("auth_bp", __name__, template_folder="templates", static_folder="static")
+auth_bp = Blueprint("auth_bp", __name__)
+
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -20,7 +21,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth_bp.login'))
-    return render_template('auth/egister.html', form=form)
+    return render_template('auth/register.html', form=form)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -38,6 +39,7 @@ def login():
         return redirect(url_for("main_bp.index"))
 
 @auth_bp.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for("main_bp.index"))

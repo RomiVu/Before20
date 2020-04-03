@@ -1,6 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from hashlib import md5
+from uuid import uuid4
 
+from flask import current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, UserMixin
@@ -42,7 +44,9 @@ class User(UserMixin, db.Model):
 
     about_me = db.Column(db.String(140))
     avator = db.Column(db.String(128))
-    role = db.Column(db.String(20), default='user')
+    role = db.Column(db.String(20), default='user') # api/user/admin/staff four kinds of role
+
+    api_token = db.relationship('ApiToken', lazy='dynamic', backref='user')
 
 
     def set_password(self, password):
@@ -125,3 +129,25 @@ class Category(db.Model):
 
     def __repr__(self):
         return f"<Category {self.title}>"
+
+class ApiToken(db.Model):
+    __tablename__ = "apitoken"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    token = db.Column(db.String(140))
+    # expire_minutes = current_app.config.get("API_TOKEN_EXPIRE_TIME", 10)
+    # to be configed
+    exipred = db.Column(db.DateTime, default=datetime.utcnow() + timedelta(minutes=10))
+
+    @classmethod
+    def gen_api_token(cls):
+        return uuid4().hex
+    
+    def update_api_token(self):
+        if datetime.utcnow() >= self.exipred:
+            self.token = ApiToken.gen_api_token()
+            self.exipred = datetime.utcnow() + timedelta(minutes=10) # to be configed
+
+    def __repr__(self):
+        return f"<ApiToken {self.id}>"

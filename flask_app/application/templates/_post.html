@@ -1,22 +1,15 @@
 <table class="table table-hover">
         <tr>
             <td width="70px">
-                <a href="{{ url_for('main_bp.user', username=post.author.username) }}">
-                    <img src="{{ post.author.avatar(70) }}" />
+                <a href="{{ url_for('main_bp.user', username=post.author.name) }}">
+                    <img src="{{ post.author.avatar(70) }}" style="max-width: 70px; max-height: 70px"/>
                 </a>
             </td>
             <td>
-                {% set user_link %}
-                    <span class="user_popup">
-                        <a href="{{ url_for('main_bp.user', username=post.author.username) }}">
-                            {{ post.author.username }}
-                        </a>
-                    </span>
-                {% endset %}
-                {{ '%(username)s said %(when)s', username=user_link, when=post.pub_date }}
-                <br>
+                <p>Username: {{ post.author.name }}</p>
+                <p>Published at: {{ post.pub_date }}</p>
+                <p>Title: {{ post.title }}</p>
                 <span id="post{{ post.id }}">{{ post.body }}</span>
-                {% endif %}
             </td>
         </tr>
     </table>

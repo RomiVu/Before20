@@ -30,8 +30,9 @@ def create_app(config=None):
     from .main import main_routes
     from .api import api_routes
     
+    admin_routes.init_app(app)
     app.register_blueprint(auth_routes.auth_bp)
-    app.register_blueprint(admin_routes.admin_bp)
+    # app.register_blueprint(admin_routes.admin_bp)
     app.register_blueprint(main_routes.main_bp)
     app.register_blueprint(api_routes.api_bp)
     

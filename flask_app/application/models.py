@@ -74,6 +74,9 @@ class User(UserMixin, db.Model):
             )
         my_posts = Post.query.filter_by(author_id=self.id)
         return followed_posts.union(my_posts).order_by(Post.pub_date.desc())
+    
+    def avatar(self, _):
+        return 'http://121.42.14.144/image/cat1.png'
 
     def __repr__(self):
         return f"<User {self.name}>"

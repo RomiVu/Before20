@@ -55,3 +55,18 @@ class ResetPasswordForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is None:
             raise ValidationError('Please use Your correct Email Address.')
+
+# reset password : 1 not logined by email 2 logined edit profile 
+# class ResetPasswordForm(FlaskForm):
+#     #ecaptchaField = RecaptchaField()
+#     old_password = PasswordField('Old Password', validators=[DataRequired(), Length(min=8)])
+#     new_password = PasswordField('New Password', validators=[DataRequired(), Length(min=8)])
+#     new_password2 = PasswordField('Repeat your Password', validators=[DataRequired(), EqualTo('new_password', message="must be same as above")])
+#     submit = SubmitField("Reset")
+
+#     def validate_old_password(self, old_password):
+#         user = User.query.filter_by(name=current_user.name).first()
+#         if user is None:
+#             raise ValidationError('Error, User not found!')
+#         if not user.check_password(old_password):
+#             raise ValidationError('Error, password is wrong!')
